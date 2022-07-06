@@ -1,12 +1,6 @@
-const { render } = wp.element;
+import App from './App';
 
-const App = () => {
-	return (
-		<div>
-			<h2>Hello Raglan Football</h2>
-		</div>
-	);
-};
+const { render } = wp.element;
 
 if ( document.getElementById( 'rfc-schedule-app' ) ) {
 	render( <App />, document.getElementById( 'rfc-schedule-app' ) );
