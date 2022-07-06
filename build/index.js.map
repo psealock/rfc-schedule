@@ -1,1 +1,0 @@
-{"version":3,"file":"index.js","mappings":";;;;;AAAAA,OAAO,CAACC,GAAR,CAAa,aAAb,E","sources":["webpack://rfc-schedule/./src/index.js"],"sourcesContent":["console.log( 'hello world' );\n"],"names":["console","log"],"sourceRoot":""}
