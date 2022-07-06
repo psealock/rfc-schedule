@@ -3,7 +3,7 @@ const { render } = wp.element;
 const App = () => {
 	return (
 		<div>
-			<h2>Hello World</h2>
+			<h2>Hello Raglan Football</h2>
 		</div>
 	);
 };
