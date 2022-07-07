@@ -17,11 +17,43 @@ defined( 'ABSPATH' ) || exit;
  * Short code output.
  */
 function renderapp() {
+	$url  = 'https://www.waibopfootball.co.nz/api/1.0/competition/cometwidget/filteredfixtures';
+	$args = array(
+		'headers' => array(
+			'Content-Type' => 'application/json',
+		),
+		'body'    => wp_json_encode(
+			array(
+				'competitionId'  => '2102990542',
+				'orgIds'         => '45003',
+				'from'           => '2022-07-09T00:00:00.000Z',
+				'to'             => '2022-07-15T00:00:00.000Z',
+				'sportId'        => '1',
+				'seasonId'       => '2022',
+				'gradeIds'       => 'U_8',
+				'gradeId'        => '',
+				'organisationId' => '',
+				'roundId'        => null,
+				'roundsOn'       => false,
+				'matchDay'       => null,
+				'phaseId'        => null,
+			)
+		),
+	);
+
+	$response = wp_remote_post( $url, $args );
+
+	if ( is_wp_error( $response ) ) {
+		$error_message = $response->get_error_message();
+		return "Something went wrong: $error_message";
+	}
+
+	print_r( $response );
 	return '<div id="rfc-schedule-app"></div>';
 }
 
 /**
- * Make the JS magic happen.
+ * Make the JS magic happen.`
  */
 function enq_react() {
 
