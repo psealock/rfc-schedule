@@ -3,10 +3,10 @@ import Schedule from './schedule';
 
 const queryClient = new QueryClient();
 
-export default function App() {
+export default function App( { fixtures } ) {
 	return (
 		<QueryClientProvider client={ queryClient }>
-			<h3>Hello Paul</h3>
+			<Schedule fixtures={ fixtures } />
 		</QueryClientProvider>
 	);
 }

@@ -48,8 +48,11 @@ function renderapp() {
 		return "Something went wrong: $error_message";
 	}
 
-	print_r( $response );
-	return '<div id="rfc-schedule-app"></div>';
+	$body     = wp_remote_retrieve_body( $response );
+	$data     = json_decode( $body, true );
+	$fixtures = $data['fixtures'];
+
+	return '<div data-fixtures=\'' . wp_json_encode( $fixtures ) . '\' id="rfc-schedule-app"></div>';
 }
 
 /**
