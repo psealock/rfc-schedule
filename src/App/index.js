@@ -1,12 +1,5 @@
-import { QueryClient, QueryClientProvider } from 'react-query';
 import Schedule from './schedule';
 
-const queryClient = new QueryClient();
-
 export default function App( { fixtures } ) {
-	return (
-		<QueryClientProvider client={ queryClient }>
-			<Schedule fixtures={ fixtures } />
-		</QueryClientProvider>
-	);
+	return <Schedule fixtures={ fixtures } />;
 }
