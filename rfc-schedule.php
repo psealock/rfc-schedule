@@ -16,7 +16,7 @@ defined( 'ABSPATH' ) || exit;
 /**
  * Short code output.
  */
-function renderapp() {
+function rcf_schedule_renderapp() {
 	$url  = 'https://www.waibopfootball.co.nz/api/1.0/competition/cometwidget/filteredfixtures';
 	$args = array(
 		'headers' => array(
@@ -24,19 +24,10 @@ function renderapp() {
 		),
 		'body'    => wp_json_encode(
 			array(
-				'competitionId'  => '2102990542',
-				'orgIds'         => '45003',
-				'from'           => '2022-07-09T00:00:00.000Z',
-				'to'             => '2022-07-15T00:00:00.000Z',
-				'sportId'        => '1',
-				'seasonId'       => '2022',
-				'gradeIds'       => 'U_8',
-				'gradeId'        => '',
-				'organisationId' => '',
-				'roundId'        => null,
-				'roundsOn'       => false,
-				'matchDay'       => null,
-				'phaseId'        => null,
+				'competitionId' => '2103020716',
+				'orgIds'        => '45003',
+				'from'          => '2022-07-09T00:00:00.000Z',
+				'to'            => '2022-07-15T00:00:00.000Z',
 			)
 		),
 	);
@@ -58,7 +49,7 @@ function renderapp() {
 /**
  * Make the JS magic happen.`
  */
-function enq_react() {
+function rcf_schedule_enq_react() {
 
 	$script_path       = '/build/index.js';
 	$script_asset_path = dirname( __FILE__ ) . '/build/index.asset.php';
@@ -81,5 +72,5 @@ function enq_react() {
 	wp_enqueue_script( 'rfc-schedule' );
 }
 
-add_shortcode( 'rfc-schedule', 'renderapp' );
-add_action( 'wp_enqueue_scripts', 'enq_react' );
+add_shortcode( 'rfc-schedule', 'rcf_schedule_renderapp' );
+add_action( 'wp_enqueue_scripts', 'rcf_schedule_enq_react' );
