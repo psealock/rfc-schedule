@@ -17,31 +17,69 @@ defined( 'ABSPATH' ) || exit;
  * Short code output.
  */
 function rcf_schedule_renderapp() {
-	$url  = 'https://www.waibopfootball.co.nz/api/1.0/competition/cometwidget/filteredfixtures';
-	$args = array(
-		'headers' => array(
-			'Content-Type' => 'application/json',
-		),
-		'body'    => wp_json_encode(
-			array(
-				'competitionId' => '2103020716',
-				'orgIds'        => '45003',
-				'from'          => '2022-07-09T00:00:00.000Z',
-				'to'            => '2022-07-15T00:00:00.000Z',
-			)
-		),
+	$url             = 'https://www.waibopfootball.co.nz/api/1.0/competition/cometwidget/filteredfixtures';
+	$competition_ids = array(
+		'2103020716',
+		'2102990542',
 	);
 
-	$response = wp_remote_post( $url, $args );
+	$requests = array();
 
-	if ( is_wp_error( $response ) ) {
-		$error_message = $response->get_error_message();
-		return "Something went wrong: $error_message";
+	foreach ( $competition_ids as $competition_id ) {
+		$requests[] = array(
+			'url'     => $url,
+			'headers' => array(
+				'Content-Type' => 'application/json',
+			),
+			'type'    => 'POST',
+			'data'    => wp_json_encode(
+				array(
+					'competitionId' => $competition_id,
+					'orgIds'        => '45003',
+					'from'          => '2022-07-30T00:00:00.000Z',
+					'to'            => '2022-08-05T00:00:00.000Z',
+				)
+			),
+		);
 	}
 
-	$body     = wp_remote_retrieve_body( $response );
-	$data     = json_decode( $body, true );
-	$fixtures = $data['fixtures'];
+	$responses = Requests::request_multiple( $requests );
+
+	$fixtures = array();
+
+	foreach ( $responses as $response ) {
+		if ( 200 !== $response->status_code ) {
+			print_r( 'error' );
+		}
+		$body       = json_decode( $response->body, true );
+		$fixtures[] = $body;
+	}
+
+	// $args = array(
+	// 'headers' => array(
+	// 'Content-Type' => 'application/json',
+	// ),
+	// 'body'    => wp_json_encode(
+	// array(
+	// 'competitionId' => '2103020716',
+	// 'competitionId' => '2102990542',
+	// 'orgIds'        => '45003',
+	// 'from'          => '2022-07-30T00:00:00.000Z',
+	// 'to'            => '2022-08-05T00:00:00.000Z',
+	// )
+	// ),
+	// );
+
+	// $response = wp_remote_post( $url, $args );
+
+	// if ( is_wp_error( $response ) ) {
+	// $error_message = $response->get_error_message();
+	// return "Something went wrong: $error_message";
+	// }
+
+	// $body     = wp_remote_retrieve_body( $response );
+	// $data     = json_decode( $body, true );
+	// $fixtures = $data['fixtures'];
 
 	return '<div data-fixtures=\'' . wp_json_encode( $fixtures ) . '\' id="rfc-schedule-app"></div>';
 }
