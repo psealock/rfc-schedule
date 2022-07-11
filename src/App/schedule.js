@@ -1,32 +1,16 @@
-const Schedule = ( { fixtures } ) => {
-	console.log( fixtures );
+import Table from './table';
 
-	return fixtures.map( ( gradeFixtures ) => {
+const Schedule = ( { data } ) => {
+	console.log( data );
+
+	return data.map( ( gradeFixtures ) => {
+		const title = gradeFixtures.roundInfo[ 0 ].description;
 		return (
-			<div key={ gradeFixtures.roundInfo[ 0 ].description }>
-				<table>
-					<thead>
-						<tr>
-							<th>Home Team</th>
-							<th>Away Team</th>
-							<th>Location</th>
-							<th>Time</th>
-						</tr>
-					</thead>
-					<tbody>
-						{ gradeFixtures.fixtures.map( ( fixture ) => {
-							return (
-								<tr key={ fixture.Id }>
-									<td>{ fixture.HomeTeamName }</td>
-									<td>{ fixture.AwayTeamName }</td>
-									<td>{ fixture.VenueName }</td>
-									<td>{ fixture.Date }</td>
-								</tr>
-							);
-						} ) }
-					</tbody>
-				</table>
-			</div>
+			<Table
+				key={ title }
+				title={ title }
+				fixtures={ gradeFixtures.fixtures }
+			/>
 		);
 	} );
 };

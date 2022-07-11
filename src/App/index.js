@@ -1,11 +1,9 @@
 import Schedule from './schedule';
-import Controls from './controls';
 
-export default function App( { fixtures } ) {
+export default function App( { data } ) {
 	return (
 		<>
-			<Controls />
-			<Schedule fixtures={ fixtures } />
+			<Schedule data={ data } />
 		</>
 	);
 }
