@@ -32,6 +32,14 @@ class RFC_Schedule {
 		$this->competition_ids = array(
 			'2103020716', // Waikato Junior 7th Grade Silver 2022 R1.
 			'2102990542', // Waikato Junior 8th Grade Platinum 2022 R1.
+			'2102872515', // Waikato Junior U8 Girls Ruby 2022 R1.
+			'2102616119', // Waikato Junior 9th Grade Gold 2022 R1.
+			'2168529430', // Waikato Junior 10th Grade Emerald 2022 R1.
+			'2102713248', // Waikato Junior 10th Grade Gold 2022 R1.
+			'2168586756', // Waikato Junior U10 Girls Olive 2022 R1.
+			'2168586302', // Waikato Junior U10 Girls Scarlet 2022 R1.
+			'2102744002', // Waikato Junior 11th Grade Red 2022 R1.
+			'2102729560', // Waikato Junior 12th Grade Green 2022 R1.
 		);
 	}
 

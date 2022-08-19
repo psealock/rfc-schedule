@@ -23,6 +23,16 @@ export default function App( { data, dates } ) {
 		'Mussels',
 		'Sea Lions',
 		'Barracudas',
+		'Dolphins',
+		'Urchins',
+		'Bull Sharks',
+		'Megalodons',
+		'Mako',
+		'Kahawai',
+		'Seahorses',
+		'Paua',
+		'Morays',
+		'Snappers',
 	];
 
 	return (
