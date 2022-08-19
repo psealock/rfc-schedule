@@ -1,7 +1,10 @@
 import Schedule from './schedule';
 import moment from 'moment';
+import { useState } from '@wordpress/element';
 
 export default function App( { data, dates } ) {
+	const [ filter, setFilter ] = useState( 'all' );
+
 	if ( data.error ) {
 		return (
 			<>
@@ -13,11 +16,33 @@ export default function App( { data, dates } ) {
 
 	const { saturday } = dates;
 	const title = moment( saturday ).format( 'dddd, MMMM Do' );
+	const teams = [
+		'all',
+		'Te Wheke',
+		'Gurnards',
+		'Mussels',
+		'Sea Lions',
+		'Barracudas',
+	];
 
 	return (
 		<>
 			<h2>{ title }</h2>
-			<Schedule data={ data } />
+			<label htmlFor="team-filter">Filter by team </label>
+
+			<select
+				value={ filter }
+				name="team"
+				id="team-filter"
+				onChange={ ( e ) => setFilter( e.target.value ) }
+			>
+				{ teams.map( ( team ) => (
+					<option key={ team } value={ team }>
+						{ team }
+					</option>
+				) ) }
+			</select>
+			<Schedule data={ data } filter={ filter } />
 		</>
 	);
 }
