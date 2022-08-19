@@ -13,6 +13,11 @@ class RFC_Schedule {
 	 * Waibop api url.
 	 */
 	const API_URL = 'https://www.waibopfootball.co.nz/api/1.0/competition/cometwidget/filteredfixtures';
+
+	/**
+	 * Raglan's orgId
+	 */
+	const RAGLAN_ORG_ID = '45003';
 	/**
 	 * Competition ids.
 	 *
@@ -25,8 +30,8 @@ class RFC_Schedule {
 	 */
 	public function __construct() {
 		$this->competition_ids = array(
-			'2103020716',
-			'2102990542',
+			'2103020716', // Waikato Junior 7th Grade Silver 2022 R1.
+			'2102990542', // Waikato Junior 8th Grade Platinum 2022 R1.
 		);
 	}
 
@@ -48,7 +53,7 @@ class RFC_Schedule {
 				'data'    => wp_json_encode(
 					array(
 						'competitionId' => $competition_id,
-						'orgIds'        => '45003',
+						'orgIds'        => self::RAGLAN_ORG_ID,
 						'from'          => $dates['saturday'],
 						'to'            => $dates['sunday'],
 					)
