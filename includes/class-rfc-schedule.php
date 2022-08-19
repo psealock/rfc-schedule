@@ -36,6 +36,7 @@ class RFC_Schedule {
 	protected function create_requests() {
 		$requests = array();
 		$url      = self::API_URL;
+		$dates    = $this->get_next_dates();
 
 		foreach ( $this->competition_ids as $competition_id ) {
 			$requests[] = array(
@@ -48,14 +49,30 @@ class RFC_Schedule {
 					array(
 						'competitionId' => $competition_id,
 						'orgIds'        => '45003',
-						'from'          => '2022-08-20T00:00:00.000Z',
-						'to'            => '2022-08-21T00:00:00.000Z',
+						'from'          => $dates['saturday'],
+						'to'            => $dates['sunday'],
 					)
 				),
 			);
 		}
 
 		return $requests;
+	}
+
+	/**
+	 * Determine the following Saturday.
+	 */
+	public function get_next_dates() {
+		if ( 'Sat' === gmdate( 'D' ) ) {
+			return array(
+				'saturday' => gmdate( 'Y-m-d\TH:i:s.000\Z', strtotime( 'today' ) ),
+				'sunday'   => gmdate( 'Y-m-d\TH:i:s.000\Z', strtotime( 'tomorrow' ) ),
+			);
+		}
+		return array(
+			'saturday' => gmdate( 'Y-m-d\TH:i:s.000\Z', strtotime( 'next Saturday' ) ),
+			'sunday'   => gmdate( 'Y-m-d\TH:i:s.000\Z', strtotime( 'next Sunday' ) ),
+		);
 	}
 
 	/**

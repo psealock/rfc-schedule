@@ -1,7 +1,8 @@
 import Schedule from './schedule';
+import moment from 'moment';
 
-export default function App( { data } ) {
-	if ( data.error || ! data.length ) {
+export default function App( { data, dates } ) {
+	if ( data.error ) {
 		return (
 			<>
 				<h2>Something has gone terribly wrong</h2>
@@ -10,9 +11,12 @@ export default function App( { data } ) {
 		);
 	}
 
+	const { saturday } = dates;
+	const title = moment( saturday ).format( 'dddd, MMMM Do' );
+
 	return (
 		<>
-			<h2>Saturday, July 30th</h2>
+			<h2>{ title }</h2>
 			<Schedule data={ data } />
 		</>
 	);

@@ -21,8 +21,9 @@ require_once 'includes/class-rfc-schedule.php';
 function rcf_schedule_renderapp() {
 	$schedule = new RFC_Schedule();
 	$fixtures = $schedule->get_fixtures();
+	$dates    = $schedule->get_next_dates();
 
-	return '<div data-fixtures=\'' . wp_json_encode( $fixtures ) . '\' id="rfc-schedule-app"></div>';
+	return '<div data-dates=\'' . wp_json_encode( $dates ) . '\' data-fixtures=\'' . wp_json_encode( $fixtures ) . '\' id="rfc-schedule-app"></div>';
 }
 
 /**
