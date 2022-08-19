@@ -2,6 +2,16 @@ import Schedule from './schedule';
 import moment from 'moment';
 import { useState } from '@wordpress/element';
 
+const sortAlphabetical = ( a, b ) => {
+	if ( a < b ) {
+		return -1;
+	}
+	if ( a > b ) {
+		return 1;
+	}
+	return 0;
+};
+
 export default function App( { data, dates } ) {
 	const [ filter, setFilter ] = useState( 'all' );
 
@@ -17,7 +27,6 @@ export default function App( { data, dates } ) {
 	const { saturday } = dates;
 	const title = moment( saturday ).format( 'dddd, MMMM Do' );
 	const teams = [
-		'all',
 		'Te Wheke',
 		'Gurnards',
 		'Mussels',
@@ -46,7 +55,8 @@ export default function App( { data, dates } ) {
 				id="team-filter"
 				onChange={ ( e ) => setFilter( e.target.value ) }
 			>
-				{ teams.map( ( team ) => (
+				<option value="all">All</option>
+				{ teams.sort( sortAlphabetical ).map( ( team ) => (
 					<option key={ team } value={ team }>
 						{ team }
 					</option>
