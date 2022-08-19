@@ -69,8 +69,12 @@ class RFC_Schedule {
 
 		foreach ( $responses as $response ) {
 			if ( 200 !== $response->status_code ) {
-				print_r( 'error' );
+				$body = json_decode( $response->body, true );
+				return array(
+					'error' => esc_html( $body['Message'] ),
+				);
 			}
+
 			$body       = json_decode( $response->body, true );
 			$fixtures[] = $body;
 		}

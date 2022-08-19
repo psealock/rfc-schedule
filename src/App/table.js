@@ -18,8 +18,8 @@ const Table = ( { fixtures, title } ) => {
 						const date = moment( fixture.Date );
 						const teamStyles = {
 							display: 'flex',
-							'flex-direction': 'column',
-							'align-items': 'center',
+							flexDirection: 'column',
+							alignItems: 'center',
 						};
 						return (
 							<tr key={ fixture.Id }>
